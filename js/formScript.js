@@ -37,7 +37,7 @@ function postUserReview(reviewId) {
       data: userReview,
       success: function (response) {
         alert("완료!");
-        window.location.href = "http://localhost:8080//reviews";
+        window.location.href = "../templates/reviews.html";
       },
       error: function (error) {
         $.ajax({
@@ -48,7 +48,7 @@ function postUserReview(reviewId) {
           data: userReview,
           success: function (response) {
             alert("완료!");
-            window.location.href = "http://localhost:8080/reviews";
+            window.location.href = "../templates/reviews.html";
           },
         });
       },
@@ -65,7 +65,7 @@ function postUserReview(reviewId) {
       },
       success: function (response) {
         alert("수정을 완료했습니다.");
-        window.location.href = `http://localhost:8080/review?id=${reviewId}`;
+        window.location.href = `../templates/review.html?id=${reviewId}`;
       },
       error: function (error) {
         $.ajax({
@@ -79,7 +79,7 @@ function postUserReview(reviewId) {
           },
           success: function (response) {
             alert("수정을 완료했습니다.");
-            window.location.href = `http://localhost:8080/review?id=${reviewId}`;
+            window.location.href = `../templates/review.html?id=${reviewId}`;
           },
         });
       },

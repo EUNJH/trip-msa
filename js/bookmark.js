@@ -241,5 +241,5 @@ function showNearBookmarks() {
 }
 
 function moveNearDetail(content_id) {
-  window.location.href = `http://localhost:8080/nearspot?id=${content_id}`;
+  window.location.href = `../templates/nearspot.html?id=${content_id}`;
 }

@@ -32,7 +32,7 @@ function sign_in() {
       localStorage.setItem("token", response["token"]);
       localStorage.setItem("username", response["username"]);
       alert("로그인 되었습니다!!");
-      window.location.href = "http://localhost:8080/index";
+      window.location.href = "../templates/index.html";
     },
     error: function (error) {
       $.ajax({
@@ -50,7 +50,7 @@ function sign_in() {
           localStorage.setItem("token", response["token"]);
           localStorage.setItem("username", response["username"]);
           alert("로그인 되었습니다!!");
-          window.location.href = "http://localhost:8080/index";
+          window.location.href = "../templates/index.html";
         },
       });
     },
@@ -123,7 +123,7 @@ function sign_up() {
     }),
     success: function (response) {
       alert(response);
-      window.location.href = "http://localhost:8080/login";
+      window.location.href = "../templates/login.html";
     },
     error: function (error) {
       $.ajax({
@@ -136,7 +136,7 @@ function sign_up() {
         }),
         success: function (response) {
           alert(response);
-          window.location.href = "http://localhost:8080/login";
+          window.location.href = "../templates/login.html";
         },
       });
     },

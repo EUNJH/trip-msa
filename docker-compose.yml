@@ -2,7 +2,7 @@ version: "3"
 
 services:
   db-mysql:
-    image: mysql
+    image: mydb
     container_name: db-mysql
     volumes:
       - ./db:/var/lib/mysql
@@ -11,6 +11,22 @@ services:
       MYSQL_ROOT_PASSWORD: 1234
     ports:
       - 5080:3306
+      - 9100:9100
+
+  prom:
+    image: prom
+    container_name: prom
+    ports:
+      - 9090:9090
+    depends_on:
+      - db-mysql
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - 3000:3000
+    depends_on:
+      - prom
 
   user:
     image: user

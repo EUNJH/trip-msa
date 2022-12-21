@@ -4,7 +4,10 @@ services:
   db-mysql:
     image: mysql
     container_name: db-mysql
+    volumes:
+      - ./db:/var/lib/mysql
     environment:
+      MYSQL_DATABASE: trip
       MYSQL_ROOT_PASSWORD: 1234
     ports:
       - 5080:3306

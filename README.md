@@ -3,6 +3,7 @@
 ### 각 컨테이너 빌드
 ```
 docker build -t mydb ./mydb
+docker build -t prom ./prom
 docker build -t bookmark ./bookmark 
 docker build -t user ./user  
 docker build -t nearspot ./nearspot  

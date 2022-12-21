@@ -11,20 +11,22 @@ services:
     image: review
     container_name: review
     ports:
-      - 5082:5002
+      - 5082:8080
 
   place:
     image: place
     container_name: place
+    ports:
+      - 5083:8080
 
   nearspot:
     image: nearspot
     container_name: nearspot
     ports:
-      - 5084:5004
+      - 5084:8080
 
   bookmark:
     image: bookmark
     container_name: bookmark
     ports:
-      - 5085:5005
+      - 5085:8080

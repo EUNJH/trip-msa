@@ -2,7 +2,7 @@ function showListSort(type) {
     $('#trip_card').empty();
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/reviews?sort=${type}`,
+        url: `http://localhost:5082/reviews?sort=${type}`,
         contentType: 'application/json; charset=utf-8',
         success: function (response) {
             for (let i = 0; i < response.length; i++) {

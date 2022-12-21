@@ -99,14 +99,14 @@ function showListSort(type) {
 }
 
 function moveTripDetail(trip_id) {
-  window.location.href = `../templates/review.html?id=${trip_id}`;
+  window.location.href = `http://localhost:8080/review?id=${trip_id}`;
 }
 
 function writeTrip() {
   if (localStorage.getItem("token")) {
-    window.location.href = "../templates/form.html";
+    window.location.href = "http://localhost:8080/form";
   } else {
     alert("로그인이 필요한 서비스입니다.");
-    window.location.href = "../templates/login.html";
+    window.location.href = "http://localhost:8080/login";
   }
 }

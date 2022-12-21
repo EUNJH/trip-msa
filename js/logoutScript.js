@@ -4,7 +4,7 @@ $(document).ready(function () {
             localStorage.removeItem('token');
             localStorage.removeItem('username');
             alert('장시간동안 접속하지 않아 로그아웃 되었습니다.');
-            window.location.href = '../templates/login.html';
+            window.location.href = 'http://localhost:8080/login';
         }
     });
 });
@@ -13,7 +13,7 @@ function logoutScript() {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
     alert('로그아웃을 완료했습니다.');
-    window.location.href = '../templates/index.html';
+    window.location.href = 'http://localhost:8080/index';
 }
 
 function deleteUser() {
@@ -26,7 +26,7 @@ function deleteUser() {
                 localStorage.removeItem('token');
                 localStorage.removeItem('username');
                 alert("회원 탈퇴가 완료되었습니다.")
-                window.location.href = '../templates/index.html';
+                window.location.href = 'http://localhost:8080/index';
             },error:function(error){
                 $.ajax({
                     type: "DELETE",
@@ -36,7 +36,7 @@ function deleteUser() {
                         localStorage.removeItem('token');
                         localStorage.removeItem('username');
                         alert("회원 탈퇴가 완료되었습니다.")
-                        window.location.href = '../templates/index.html';
+                        window.location.href = 'http://localhost:8080/index';
                     }
                 });
             }

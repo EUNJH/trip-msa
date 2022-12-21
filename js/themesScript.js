@@ -175,7 +175,7 @@ function popularList(quantity) {
 }
 
 function movePopularDetail(content_id) {
-  window.location.href = `../templates/theme.html?id=${content_id}`;
+  window.location.href = `http://localhost:8080/theme?id=${content_id}`;
 }
 
 function checkCovid(str) {

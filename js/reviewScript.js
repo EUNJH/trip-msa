@@ -85,7 +85,7 @@ function postComment(reviewId) {
         statusCode: {
             401: () => { // 로그인 안 하고 댓글 작성 시
                 alert('로그인이 필요한 서비스입니다.');
-                window.location.href = "../templates/login.html";
+                window.location.href = "http://localhost:8080/login";
             }
         },
         success: function (response) {
@@ -100,7 +100,7 @@ function postComment(reviewId) {
                 statusCode: {
                     401: () => { // 로그인 안 하고 댓글 작성 시
                         alert('로그인이 필요한 서비스입니다.');
-                        window.location.href = "../templates/login.html";
+                        window.location.href = "http://localhost:8080/login";
                     }
                 },
                 success: function (response) {
@@ -260,7 +260,7 @@ function updateComment(commentId) {
         statusCode: {
             401: () => { // 로그인 안 하고 댓글 작성 시
                 alert('로그인이 필요한 서비스입니다.');
-                window.location.href = "../templates/login.html";
+                window.location.href = "http://localhost:8080/login";
             }
         },
         success: function (response) {
@@ -275,7 +275,7 @@ function updateComment(commentId) {
                 statusCode: {
                     401: () => { // 로그인 안 하고 댓글 작성 시
                         alert('로그인이 필요한 서비스입니다.');
-                        window.location.href = "../templates/login.html";
+                        window.location.href = "http://localhost:8080/login";
                     }
                 },
                 success: function (response) {
@@ -293,14 +293,14 @@ function updateUserReview(id) {
 
     if (!localStorage.getItem('token')) {
         alert('로그인이 필요한 서비스입니다.')
-        window.location.href = "../templates/login.html"
+        window.location.href = "http://localhost:8080/login"
     } else {
         sessionStorage.setItem("title", $("#title").text())
         sessionStorage.setItem("place", $("#place").text())
         sessionStorage.setItem("review", $("#review").text())
         sessionStorage.setItem("file", $("#file").attr("src"))
 
-        window.location.href = `../templates/form.html?id=${id}`;
+        window.location.href = `http://localhost:8080/form?id=${id}`;
     }
 }
 
@@ -313,14 +313,14 @@ function deleteUserReview(id) {
             url: `http://localhost:5082/reviews/${id}/${username}`,
             data: {},
             success: function (response) {
-                window.location.href = "../templates/reviews.html";
+                window.location.href = "http://localhost:8080/reviews";
             },error:function(error){
                 $.ajax({
                     type: "DELETE",
                     url: `http://localhost:5092/reviews/${id}/${username}`,
                     data: {},
                     success: function (response) {
-                        window.location.href = "../templates/reviews.html";
+                        window.location.href = "http://localhost:8080/reviews";
                     }
                 });
             }
@@ -335,7 +335,7 @@ function userReviewLike(trip_id) {
 
     if (!localStorage.getItem('token')) {
         alert('로그인이 필요한 서비스입니다.')
-        window.location.href = "../templates/login.html"
+        window.location.href = "http://localhost:8080/login"
     } else {
         if ($('#like').hasClass("far")) {
 

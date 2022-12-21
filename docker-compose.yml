@@ -12,6 +12,8 @@ services:
     ports:
       - 5080:3306
       - 9100:9100
+    cpu_shares: 512
+    mem_limit: 1073741824
 
   prom:
     image: prom
@@ -35,6 +37,8 @@ services:
       - 5081:8080
     depends_on:
       - db-mysql
+    cpu_shares: 512
+    mem_limit: 1073741824
 
   review:
     image: review
@@ -43,6 +47,8 @@ services:
       - 5082:8080
     depends_on:
       - db-mysql
+    cpu_shares: 512
+    mem_limit: 1073741824
 
   place:
     image: place
@@ -51,6 +57,8 @@ services:
       - 5083:8080
     depends_on:
       - db-mysql
+    cpu_shares: 512
+    mem_limit: 1073741824
 
   nearspot:
     image: nearspot
@@ -59,6 +67,8 @@ services:
       - 5084:8080
     depends_on:
       - db-mysql
+    cpu_shares: 512
+    mem_limit: 1073741824
 
   bookmark:
     image: bookmark
@@ -67,6 +77,8 @@ services:
       - 5085:8080
     depends_on:
       - db-mysql
+    cpu_shares: 512
+    mem_limit: 1073741824
 
   users:
     image: user

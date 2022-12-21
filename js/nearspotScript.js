@@ -90,7 +90,7 @@ function getMap() {
     ),
     map: map,
     icon: {
-      content: '<img src="http://localhost:5084/nearspots/marker" width="30">',
+      content: '<img src="http://localhost:5094/nearspots/marker" width="30">',
       anchor: new naver.maps.Point(20, 25),
     },
   });

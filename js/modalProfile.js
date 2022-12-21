@@ -18,6 +18,18 @@ function saveProfile() {
         success: function (response) {
             alert('프로필 업데이트 완료!');
             window.location.reload();
+        },error:function(error){
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:5091/user",
+                data: form_data,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    alert('프로필 업데이트 완료!');
+                    window.location.reload();
+                }
+            });
         }
     });
 }

@@ -102,7 +102,75 @@ function popularList(quantity) {
                             </li>`;
         $("#popular_card").append(temp_html);
       }
-    },
+    },error:function(error){
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:5093/themes",
+        contentType: "application/json",
+        data: JSON.stringify({
+          quantity: quantity,
+          cat1: cat1,
+          cat2: cat2,
+          cat3: cat3,
+        }),
+        success: function (response) {
+          $(".before-render").hide();
+          $("#popular_card").empty();
+          response = JSON.parse(response);
+          let popular_list = response["popular_list"];
+    
+          let cat1 = response["cat1"];
+          let cat2 = response["cat2"];
+          let cat3 = response["cat3"];
+    
+          sessionStorage.setItem("cat1", cat1);
+          sessionStorage.setItem("cat2", cat2);
+          sessionStorage.setItem("cat3", cat3);
+    
+          for (let i = 0; i < popular_list.length; i++) {
+            let content_id = popular_list[i]["contentid"];
+            let title = popular_list[i]["title"];
+            let file = popular_list[i]["firstimage"];
+            if (!file)
+              file = "https://dk9q1cr2zzfmc.cloudfront.net/img/default.jpg";
+            let areacode = parseInt(popular_list[i]["areacode"]);
+            let address = check_address(areacode);
+            let mapx = popular_list[i]["mapx"];
+            let mapy = popular_list[i]["mapy"];
+            if (!mapx || !mapy) {
+              mapx = 0;
+              mapy = 0;
+            }
+    
+            let covid = checkCovid(address);
+            let covid_city_name = covid_check_city(covid);
+            let covid_count = JSON.parse(sessionStorage.getItem("covid_info"))[
+              covid_city_name
+            ]["newCcase"];
+    
+            let temp_html = `<li style="margin: 0 10px; height: 300px;">
+                                     <a href="javascript:movePopularDetail(${content_id})" class="card">
+                                        <img src="${file}" class="card__image" alt="내 위치 근처 여행지 사진"/>
+                                        <div class="card__overlay">
+                                            <div class="card__header">
+                                                <svg class="card__arc" xmlns="https://www.w3.org/TR/2018/CR-SVG2-20181004/">
+                                                    <path/>
+                                                </svg>
+                                                <img class="card__thumb" src="${file}" alt="썸네일"/>
+                                                <div class="card__header-text">
+                                                    <h3 class="card__title">${title}</h3>
+                                                    <span class="card__status">${address}</span>
+                                                </div>
+                                            </div>
+                                            <p class="card__description" >이 지역의 일일코로나 감염자 수 ${covid_count}명</p>
+                                        </div>
+                                    </a>
+                                </li>`;
+            $("#popular_card").append(temp_html);
+          }
+        },
+      });
+    }
   });
 }
 

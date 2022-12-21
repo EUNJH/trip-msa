@@ -27,6 +27,18 @@ function deleteUser() {
                 localStorage.removeItem('username');
                 alert("회원 탈퇴가 완료되었습니다.")
                 window.location.href = '../templates/index.html';
+            },error:function(error){
+                $.ajax({
+                    type: "DELETE",
+                    url: `http://localhost:5091/user/${localStorage.getItem('username')}`,
+                    data: {},
+                    success: function (response) {
+                        localStorage.removeItem('token');
+                        localStorage.removeItem('username');
+                        alert("회원 탈퇴가 완료되었습니다.")
+                        window.location.href = '../templates/index.html';
+                    }
+                });
             }
         });
     } else {

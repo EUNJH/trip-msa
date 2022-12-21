@@ -35,7 +35,39 @@ function getDetailIntro() {
 
       sessionStorage.setItem("popular_place_lat", response["mapy"]);
       sessionStorage.setItem("popular_place_lng", response["mapx"]);
-    },
+    },error:function(error){
+      $.ajax({
+        type: "GET",
+        url: `http://localhost:5093/themes/${getId_popular()}`,
+        data: {},
+        async: false,
+        success: function (response) {
+          response = JSON.parse(response);
+          $("#title").text(response["title"]);
+          if (response["firstimage"]) {
+            $("#file").attr("src", response["firstimage"]);
+          } else {
+            $("#file").attr(
+              "src",
+              "https://dk9q1cr2zzfmc.cloudfront.net/img/default.jpg"
+            );
+          }
+          $("#overview").html(response["overview"]);
+          if (response["homepage"]) {
+            $("#homepage").html(response["homepage"]);
+          } else {
+            $("#homepage").text("");
+          }
+          if (!response["mapy"] || !response["mapx"]) {
+            response["mapy"] = 0;
+            response["mapx"] = 0;
+          }
+    
+          sessionStorage.setItem("popular_place_lat", response["mapy"]);
+          sessionStorage.setItem("popular_place_lng", response["mapx"]);
+        },
+      });
+    }
   });
 }
 
@@ -110,7 +142,37 @@ function weather_popular() {
       $("#weather").text(weather);
       $("#temp").text(temp + "°C");
       $("#wind").text(wind + "m/s");
-    },
+    },error:function(error){
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:5093/weather",
+        contentType: "application/json",
+        data: JSON.stringify({
+          place_lat: place_lat,
+          place_lng: place_lng,
+        }),
+        async: false,
+        success: function (response) {
+          response = JSON.parse(response);
+          let icon = response["weather"][0]["icon"];
+          let weather = response["weather"][0]["main"];
+          let temp = response["main"]["temp"];
+          temp = Number(temp).toFixed(1); //소수점 둘째자리에서 반올림해 첫째자리까지 표현
+          let location = response["name"];
+          if (weather == "Rain") {
+            let rain = response["rain"]["1h"];
+            $("#rain").text(rain + "mm/h");
+          }
+          let wind = response["wind"]["speed"];
+    
+          $("#icon").attr("src", `https://openweathermap.org/img/w/${icon}.png`);
+          $("#location").text(location);
+          $("#weather").text(weather);
+          $("#temp").text(temp + "°C");
+          $("#wind").text(wind + "m/s");
+        },
+      });
+    }
   });
 }
 
@@ -129,7 +191,16 @@ function toggle_bookmark_popular(content_id) {
         data: {},
         success: function (response) {
           $("#bookmark").removeClass("fas").addClass("far");
-        },
+        },error:function(error){
+          $.ajax({
+            type: "DELETE",
+            url: `http://localhost:5095/themes/${content_id}/bookmark/${username}`,
+            data: {},
+            success: function (response) {
+              $("#bookmark").removeClass("fas").addClass("far");
+            },
+          });
+        }
       });
     } else {
       $.ajax({
@@ -142,7 +213,20 @@ function toggle_bookmark_popular(content_id) {
         }),
         success: function (response) {
           $("#bookmark").removeClass("far").addClass("fas");
-        },
+        },error:function(error){
+          $.ajax({
+            type: "POST",
+            url: `http://localhost:5095/themes/${content_id}/bookmark/${username}`,
+            contentType: "application/json",
+            data: JSON.stringify({
+              title: title,
+              img_url: file,
+            }),
+            success: function (response) {
+              $("#bookmark").removeClass("far").addClass("fas");
+            },
+          });
+        }
       });
     }
   }
@@ -159,6 +243,19 @@ function getBookmark_popular() {
       } else {
         $("#bookmark").removeClass("fas").addClass("far");
       }
-    },
+    },error:function(error){
+      $.ajax({
+        type: "GET",
+        url: `http://localhost:5095/themes/${getId_popular()}/bookmark/${username}`,
+        data: {},
+        success: function (response) {
+          if (response["bookmarkStatus"] == true) {
+            $("#bookmark").removeClass("far").addClass("fas");
+          } else {
+            $("#bookmark").removeClass("fas").addClass("far");
+          }
+        },
+      });
+    }
   });
 }

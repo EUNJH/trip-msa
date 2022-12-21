@@ -109,6 +109,16 @@ function getUser(username) {
     success: function (response) {
       userReviewProfile_img = response["profileImgUrl"];
       userReviewNickname = response["nickname"];
-    },
+    },error:function(error){
+      $.ajax({
+        type: "GET",
+        url: `http://localhost:5091/user/${username}}`,
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+          userReviewProfile_img = response["profileImgUrl"];
+          userReviewNickname = response["nickname"];
+        }
+      });
+    }
   });
 }

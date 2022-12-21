@@ -110,3 +110,28 @@ function writeTrip() {
     window.location.href = "../templates/login.html";
   }
 }
+<<<<<<< HEAD
+=======
+
+function getUser(username) {
+  $.ajax({
+    type: "GET",
+    url: `http://localhost:5081/user/${username}}`,
+    contentType: "application/json; charset=utf-8",
+    success: function (response) {
+      userReviewProfile_img = response["profileImgUrl"];
+      userReviewNickname = response["nickname"];
+    },error:function(error){
+      $.ajax({
+        type: "GET",
+        url: `http://localhost:5091/user/${username}}`,
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+          userReviewProfile_img = response["profileImgUrl"];
+          userReviewNickname = response["nickname"];
+        }
+      });
+    }
+  });
+}
+>>>>>>> a6c0bcfcd2c26049b0df5de90a2a6ad88e220ff9

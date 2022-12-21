@@ -193,7 +193,7 @@ function showTripReviews(type) {
     $('#index_trip_card').empty();
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/reviews?sort=${type}`,
+        url: `http://localhost:5082/reviews?sort=${type}`,
         contentType: 'application/json; charset=utf-8',
         success: function (response) {
             for (let i = 0; i < response.length; i++) {
@@ -242,7 +242,7 @@ function moveTripDetail(trip_id) {
 function showPopularTrips() {
     $.ajax({
         type: 'GET',
-        url: "http://localhost:8080/themes",
+        url: "http://localhost:5083/themes",
         data: {},
         success: function (response) {
             $('#popular_card').empty();

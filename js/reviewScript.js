@@ -8,7 +8,7 @@ let username = localStorage.getItem('username');
 function getUserReview(reviewId) {
     $.ajax({
         type: "GET",
-        url: `http://localhost:5082/reviews/${reviewId}/${username}`,
+        url: `http://localhost:5082/reviews/${reviewId}`,
         success: function (response) {
             $('#title').text(response['title']);
             $('#place').text(response['place']);
@@ -27,7 +27,7 @@ function getUserReview(reviewId) {
         },error:function(error){
             $.ajax({
                 type: "GET",
-                url: `http://localhost:5092/reviews/${reviewId}/${username}`,
+                url: `http://localhost:5092/reviews/${reviewId}`,
                 success: function (response) {
                     $('#title').text(response['title']);
                     $('#place').text(response['place']);

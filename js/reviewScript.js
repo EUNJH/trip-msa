@@ -8,7 +8,7 @@ let username = localStorage.getItem('username');
 function getUserReview(reviewId) {
     $.ajax({
         type: "GET",
-        url: `http://localhost:5082/reviews/${reviewId}`,
+        url: `http://localhost:5082/reviews/${reviewId}/${username}`,
         success: function (response) {
             $('#title').text(response['title']);
             $('#place').text(response['place']);
@@ -27,7 +27,7 @@ function getUserReview(reviewId) {
         },error:function(error){
             $.ajax({
                 type: "GET",
-                url: `http://localhost:5092/reviews/${reviewId}`,
+                url: `http://localhost:5092/reviews/${reviewId}/${username}`,
                 success: function (response) {
                     $('#title').text(response['title']);
                     $('#place').text(response['place']);
@@ -79,7 +79,7 @@ function postComment(reviewId) {
 
     $.ajax({
         type: "POST",
-        url: `http://localhost:5082/reviews/${reviewId}/comment`,
+        url: `http://localhost:5082/reviews/${reviewId}/comment/${username}`,
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify({comment: UserReviewComment}),
         statusCode: {
@@ -94,7 +94,7 @@ function postComment(reviewId) {
         },error:function(error){
             $.ajax({
                 type: "POST",
-                url: `http://localhost:5092/reviews/${reviewId}/comment`,
+                url: `http://localhost:5092/reviews/${reviewId}/comment/${username}`,
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify({comment: UserReviewComment}),
                 statusCode: {
@@ -254,7 +254,7 @@ function updateComment(commentId) {
     }
     $.ajax({
         type: "PUT",
-        url: `http://localhost:5082/reviews/${getId()}/comments/${commentId}`,
+        url: `http://localhost:5082/reviews/${getId()}/comments/${commentId}/${username}`,
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(UserReviewComment),
         statusCode: {
@@ -269,7 +269,7 @@ function updateComment(commentId) {
         },error:function(error){
             $.ajax({
                 type: "PUT",
-                url: `http://localhost:5092/reviews/${getId()}/comments/${commentId}`,
+                url: `http://localhost:5092/reviews/${getId()}/comments/${commentId}/${username}`,
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify(UserReviewComment),
                 statusCode: {
@@ -310,14 +310,14 @@ function deleteUserReview(id) {
     if (confirm("삭제 하시겠습니까?") === true) {
         $.ajax({
             type: "DELETE",
-            url: `http://localhost:5082/reviews/${id}`,
+            url: `http://localhost:5082/reviews/${id}/${username}`,
             data: {},
             success: function (response) {
                 window.location.href = "../templates/reviews.html";
             },error:function(error){
                 $.ajax({
                     type: "DELETE",
-                    url: `http://localhost:5092/reviews/${id}`,
+                    url: `http://localhost:5092/reviews/${id}/${username}`,
                     data: {},
                     success: function (response) {
                         window.location.href = "../templates/reviews.html";
@@ -341,7 +341,7 @@ function userReviewLike(trip_id) {
 
             $.ajax({
                 type: "POST",
-                url: `http://localhost:5082/reviews/${trip_id}/like`,
+                url: `http://localhost:5082/reviews/${trip_id}/like/${username}`,
                 data: {},
                 success: function (response) {
                     getUserReview(getId())
@@ -349,7 +349,7 @@ function userReviewLike(trip_id) {
                 },error:function(error){
                     $.ajax({
                         type: "POST",
-                        url: `http://localhost:5092/reviews/${trip_id}/like`,
+                        url: `http://localhost:5092/reviews/${trip_id}/like/${username}`,
                         data: {},
                         success: function (response) {
                             getUserReview(getId())
@@ -361,7 +361,7 @@ function userReviewLike(trip_id) {
         } else {
             $.ajax({
                 type: "DELETE",
-                url: `http://localhost:5082/reviews/${trip_id}/like`,
+                url: `http://localhost:5082/reviews/${trip_id}/like/${username}`,
                 data: {},
                 success: function (response) {
                     getUserReview(getId())
@@ -369,7 +369,7 @@ function userReviewLike(trip_id) {
                 },error:function(error){
                     $.ajax({
                         type: "DELETE",
-                        url: `http://localhost:5092/reviews/${trip_id}/like`,
+                        url: `http://localhost:5092/reviews/${trip_id}/like/${username}`,
                         data: {},
                         success: function (response) {
                             getUserReview(getId())
@@ -385,7 +385,7 @@ function userReviewLike(trip_id) {
 function get_like(id) {
     $.ajax({
         type: "GET",
-        url: `http://localhost:5082/reviews/${id}/like`,
+        url: `http://localhost:5082/reviews/${id}/like/${username}`,
         data: {},
         success: function (response) {
             if (response['likeStatus'] == true) {
@@ -396,7 +396,7 @@ function get_like(id) {
         },error:function(error){
             $.ajax({
                 type: "GET",
-                url: `http://localhost:5092/reviews/${id}/like`,
+                url: `http://localhost:5092/reviews/${id}/like/${username}`,
                 data: {},
                 success: function (response) {
                     if (response['likeStatus'] == true) {

@@ -60,8 +60,7 @@ function getMap_popular() {
     ),
     map: map,
     icon: {
-      content:
-        '<img src="https://dk9q1cr2zzfmc.cloudfront.net/img/marker.png">',
+      content: '<img src=http://localhost:5084/nearspots/marker" width="30">',
       anchor: new naver.maps.Point(20, 25),
     },
   });

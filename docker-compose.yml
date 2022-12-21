@@ -51,3 +51,43 @@ services:
       - 5085:8080
     depends_on:
       - db-mysql
+
+  users:
+    image: user
+    container_name: user2
+    ports:
+      - 5091:8080
+    depends_on:
+      - db-mysql
+
+  reviews:
+    image: review
+    container_name: review2
+    ports:
+      - 5092:8080
+    depends_on:
+      - db-mysql
+
+  places:
+    image: place
+    container_name: place2
+    ports:
+      - 5093:8080
+    depends_on:
+      - db-mysql
+
+  nearspots:
+    image: nearspot
+    container_name: nearspot2
+    ports:
+      - 5094:8080
+    depends_on:
+      - db-mysql
+
+  bookmarks:
+    image: bookmark
+    container_name: bookmark2
+    ports:
+      - 5095:8080
+    depends_on:
+      - db-mysql

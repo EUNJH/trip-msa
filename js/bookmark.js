@@ -125,6 +125,41 @@ function showPopularBookmarks() {
         slide1();
       }
     },
+    error: function (error) {
+      $.ajax({
+        type: "GET",
+        url: `http://localhost:5095/bookmarks/${username}?type=popular`,
+        contentType: "application/json",
+        data: {},
+        success: function (response) {
+          for (let i = 0; i < response.length; i++) {
+            let content_id = response[i]["contentId"];
+            let title = response[i]["title"];
+            let file = response[i]["imgUrl"];
+
+            let temp_html = `<li style="margin: 0 10px 20px 10px; height: 300px;">
+                                         <a href="javascript:movePopularDetail(${content_id})" class="card">
+                                            <img src="${file}" class="card__image" alt="즐겨찾기한 여행지 사진"/>
+                                            <div class="card__overlay">
+                                                <div class="card__header">
+                                                    <svg class="card__arc" xmlns="https://www.w3.org/TR/2018/CR-SVG2-20181004/">
+                                                        <path/>
+                                                    </svg>
+                                                    <img class="card__thumb" src="${file}" alt="썸네일"/>
+                                                    <div class="card__header-text">
+                                                        <h3 class="card__title">${title}</h3>
+                                                    </div>
+                                                </div>
+                                                <p class="card__description" ></p>
+                                            </div>
+                                        </a>
+                                    </li>`;
+            $("#popular_card").append(temp_html);
+            slide1();
+          }
+        },
+      });
+    },
   });
 }
 
@@ -165,6 +200,42 @@ function showNearBookmarks() {
         $("#near_card").append(temp_html);
         slide2();
       }
+    },
+    error: function (error) {
+      $.ajax({
+        type: "GET",
+        url: `http://localhost:5095/bookmarks/${username}?type=near`,
+        contentType: "application/json",
+        data: {},
+        success: function (response) {
+          for (let i = 0; i < response.length; i++) {
+            let content_id = response[i]["contentId"];
+            let title = response[i]["title"];
+            let file = response[i]["imgUrl"];
+            let address = response[i]["address"];
+
+            let temp_html = `<li style="margin: 0 10px 20px 10px; height: 300px;">
+                                         <a href="javascript:moveNearDetail(${content_id})" class="card">
+                                            <img src="${file}" class="card__image" alt="즐겨찾기한 여행지 사진"/>
+                                            <div class="card__overlay">
+                                                <div class="card__header">
+                                                    <svg class="card__arc" xmlns="https://www.w3.org/TR/2018/CR-SVG2-20181004/">
+                                                        <path/>
+                                                    </svg>
+                                                    <img class="card__thumb" src="${file}" alt="썸네일"/>
+                                                    <div class="card__header-text">
+                                                        <h3 class="card__title">${title}</h3>
+                                                    </div>
+                                                </div>
+                                                <p class="card__description">${address}</p>
+                                            </div>
+                                        </a>
+                                    </li>`;
+            $("#near_card").append(temp_html);
+            slide2();
+          }
+        },
+      });
     },
   });
 }

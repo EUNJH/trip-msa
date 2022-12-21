@@ -1,32 +1,50 @@
 version: "3"
 
 services:
+  db-mysql:
+    image: mysql
+    container_name: db-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+    ports:
+      - 5080:3306
+
   user:
     image: user
     container_name: user
     ports:
       - 5081:8080
+    depends_on:
+      - db-mysql
 
   review:
     image: review
     container_name: review
     ports:
       - 5082:8080
+    depends_on:
+      - db-mysql
 
   place:
     image: place
     container_name: place
     ports:
       - 5083:8080
+    depends_on:
+      - db-mysql
 
   nearspot:
     image: nearspot
     container_name: nearspot
     ports:
       - 5084:8080
+    depends_on:
+      - db-mysql
 
   bookmark:
     image: bookmark
     container_name: bookmark
     ports:
       - 5085:8080
+    depends_on:
+      - db-mysql

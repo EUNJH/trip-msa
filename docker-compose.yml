@@ -2,63 +2,29 @@ version: "3"
 
 services:
   user:
-    build:
-      context: .
-      dockerfile: ./user/Dockerfile
+    image: user
     container_name: user
-    volumes:
-      - ./user:/app
     ports:
       - 5081:8080
-    links:
-      - db-mysql
-    depends_on:
-      - review
 
   review:
-    build:
-      context: .
-      dockerfile: ./review/Dockerfile
+    image: review
     container_name: review
-    volumes:
-      - ./review:/app
     ports:
       - 5082:5002
-    links:
-      - db-mysql
 
   place:
-    build:
-      context: .
-      dockerfile: ./place/Dockerfile
+    image: place
     container_name: place
-    volumes:
-      - ./place:/app
-    ports:
-      - 5083:5003
-    links:
-      - db-mysql
 
   nearspot:
-    build:
-      context: .
-      dockerfile: ./nearspot/Dockerfile
+    image: nearspot
     container_name: nearspot
-    volumes:
-      - ./nearspot:/app
     ports:
       - 5084:5004
-    depends_on:
-      - bookmark
 
   bookmark:
-    build:
-      context: .
-      dockerfile: ./bookmark/Dockerfile
+    image: bookmark
     container_name: bookmark
-    volumes:
-      - ./bookmark:/app
     ports:
       - 5085:5005
-    links:
-      - db-mysql

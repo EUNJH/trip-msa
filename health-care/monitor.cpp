@@ -8,8 +8,8 @@
 using namespace std;
 #define getItem(node, key) (cJSON_GetObjectItemCaseSensitive((node), (key)))
 #define SCALE_DURATION 20 // scaling duration (sec)
-#define CONTAINER_NUM 2 // number of containers to get health check
-const char CONTAINERS[CONTAINER_NUM][20] = {"/user", "/review"}; // container names to get health check
+#define CONTAINER_NUM 11 // number of containers to get health check
+const char CONTAINERS[CONTAINER_NUM][20] = {"/user", "/review", "/bookmark", "/place", "/nearspot", "/user2", "/review2", "/bookmark2", "/place2", "/nearspot2", "/db-mysql"}; // container names to get health check
 
 typedef struct Container {
 	char id[65]; 				// container ID
@@ -274,7 +274,6 @@ void printHost(Host* host, Con* head, int* ex_total_jiffels, int* ex_work_jiffel
 void printJsonLog(Host* host_info, Con* head){
 	FILE* fp;
 	clock_t curTime = clock();
-	struct tm *pLocal = localtime(&curTime);
 	char path[30] = "./logs/";
 	char fname[20];
 	cJSON* json = cJSON_CreateObject();
@@ -283,11 +282,6 @@ void printJsonLog(Host* host_info, Con* head){
 	cJSON* container;
 	cJSON* tmp;
 	Con* ptr;
-
-	if (pLocal == NULL){
-		cout << "Can't get current time to make Log file" << endl;
-		return;
-	}
 
 	sprintf(fname, "%02d:%02d:%02d.json", pLocal->tm_hour, pLocal->tm_min, pLocal->tm_sec);
 
@@ -639,7 +633,7 @@ int main() {
    		printJsonLog(host, head); // print json log file
 
 		// check container and restart stopped container
-		// healthCheck(head);
+		healthCheck(head);
 
 		// auto scaling
 		autoScale(head);

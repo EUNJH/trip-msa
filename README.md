@@ -1,6 +1,11 @@
 # trip-msa
 
+### 프로젝트
+
+[a팀\_trip.pptx](https://github.com/EUNJH/trip-msa/files/10298801/a._trip.pptx)
+
 ### 어플리케이션 컨테이너 코드
+
 [<컨테이너 코드>](https://github.com/EUNJH/trip-msa-code)
 
 ### 각 컨테이너 빌드
@@ -57,7 +62,7 @@ docker run -d --name exporter -p 9104:9104 --network trip-msa_default --env DATA
 - Import via grafana.com 에 다음 숫자를 입력 후 Load
 
 > - 11378 `(spring boot monitor)` # Springboot 서버 상태 시각화
->- 1860 `(node exporter full)` # Database 컨테이너 시스템 상태 시각화
+> - 1860 `(node exporter full)` # Database 컨테이너 시스템 상태 시각화
 > - 7362 `(MySQL Overview)` # Database 상태 시각화
 
 ---
@@ -83,7 +88,7 @@ sh start.sh # 실행되지 않는 경우, g++ 설치 확인 및 쉘 스크립트
 - Mem Share가 60%를 초과했을 때 -> Mem Limit를 2gb로 스케일 아웃
 - 스케일 아웃은 기본적으로 monitor.cpp의 `SCALE_DURATION` (line 10, 초 단위) 만큼 지속됨.
 - 스케일 아웃된 시간이 SCALE_DURATION을 지났을 때
-  - CPU Share가 65% 이하일 때 Cpu 스케일 인  (CpuShares 512)
+  - CPU Share가 65% 이하일 때 Cpu 스케일 인 (CpuShares 512)
   - Mem Share가 60% 이하일 때 Mem 스케일 인 (Mem Limit 1gb)
 
 ### 헬스케어 테스트 방법

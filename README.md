@@ -2,6 +2,9 @@
 
 ### 프로젝트
 
+[컴응설a팀.pptx](https://github.com/EUNJH/trip-msa/files/10300106/a.pptx)
+[컴응설a팀.pdf](https://github.com/EUNJH/trip-msa/files/10300108/a.pdf)
+
 [a팀\_trip.pptx](https://github.com/EUNJH/trip-msa/files/10298801/a._trip.pptx)
 
 ### 어플리케이션 컨테이너 코드
